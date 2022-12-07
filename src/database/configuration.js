@@ -1,7 +1,7 @@
 /**
  * setting to connect to data base
  * ajustes de base de datos
- * se termino de configurar
+ * se termino de configurargit commit -m "final version 1"
  */
 const mongoose = require('mongoose');
 
