@@ -69,6 +69,9 @@ app.use( '/api/issued',require( './routes/status/issued.routes' ));
 
 app.use( '/api/taxes',require( './routes/accounting/taxes.routes' ));
 
+app.use( '/api/lubricants',require( './routes/lubricants/lubricants.routes' ));
+app.use( '/api/lubricantsInventory',require( './routes/lubricants/lubricantInventory.routes' ));
+
 app.listen( 3000 , ()=> {
     console.log('Servidor corriendo en puerto => ' + 3000);
 });
