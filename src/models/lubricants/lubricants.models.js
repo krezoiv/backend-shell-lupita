@@ -7,7 +7,7 @@ const LubricantsSchema = Schema ({
 
     lubricantInvetoryCode : {
         type: String,
-        unique: true
+        unique:true
     },
 
     lubricantName : {

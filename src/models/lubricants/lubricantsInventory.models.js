@@ -14,7 +14,8 @@ const LubricantInventorySchema = Schema({
     },
 
     lubricantAvailable: {
-        type: Number
+        type: Number,
+        default: 0
     },
 
 }, { collection: 'lubricantInventory' });

@@ -7,9 +7,10 @@ const readLubricantInventory = async (req, res = response) => {
 
     try {
         const lubricantInventory = await LubricantInventory.find({}, 'lubricantInvetoryCode lubricantId lubricantAvailable ')
-            .populate({
-                path: 'lubricantId'
-            });
+        .populate({
+            path: 'lubricantId'
+        })
+      
 
         res.json({
             ok: true,
@@ -43,19 +44,43 @@ const createLubricantInventory = async (req, res = response) => {
     }
 }
 
+//rebajar inventario desde una venta, busqueda por codigo de inventario
 const saleLubricantInventory = async (req, res = response) => {
-    
-    const inventoryCode = String
-    const {lubricantInvetoryCode} = req.body;
 
-    const id = '63922a92097f57bb058784f7'
+    const available = Number;
+    const newAvailable = Number;
+    const { lubricantInvetoryCode, amount } = req.body;
+
+
     try {
-        const codigo = await LubricantInventory.findOne(lubricantId)
-       
+        const totalInventory = await LubricantInventory.findOne({ "lubricantInvetoryCode": lubricantInvetoryCode })
+        this.available = totalInventory.lubricantAvailable
+
+
+        if(this.available < amount ){
+            return res.status(400).json({
+                ok: false,
+                msg: 'Inventario insuficiente'
+            });
+        }
+
+        this.newAvailable = this.available - amount
+  
+        const salesLubricante = await LubricantInventory.updateOne({
+            "lubricantInvetoryCode": lubricantInvetoryCode
+        }, {
+            $set: {
+                "lubricantAvailable": this.newAvailable
+            }
+        }, {
+            multi: false
+        })
         res.json({
             ok: true,
-            codigo
+            salesLubricante
+            
         })
+
 
     } catch (error) {
         console.log(error)
